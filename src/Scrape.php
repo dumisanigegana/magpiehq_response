@@ -123,7 +123,7 @@ class Scrape
 
           $month = array_search($matches[2], $month_names) + 1; // Convert the month name to number 
           $month = strlen($month) < 2 ? '0'.$month : $month;  // Prepend a 0 if month > 10.
-          $results = $year . '-' . $month . '-' . $day;        
+          $results = $year . '-' . $month . '-' . $day;   // Mantain a uniform date format.     
           return $results;
         }
       }

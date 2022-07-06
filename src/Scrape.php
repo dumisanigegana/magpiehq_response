@@ -82,22 +82,31 @@ class Scrape
     }
   }
 
+  /**
+   * Extracts the Date substring, using regular expressions.
+   * 
+   * @param string $shippingText
+   * 
+   * @return The shiping Date in YYYY-MM-DD format.
+   */
   public function shipingDate($shippingText)
   {
     $find = array("th","st", "rd", "nd");    // Remove ordinal numbers if existing
     $text = str_replace($find, '', $shippingText);
     if(strstr($text, "Deliver")) 
     {
+      //Search for the date in YYYY-MM-DD format 
       preg_match('/(19|20)\d\d[\-\/.](0[1-9]|1[012])[\-\/.](0[1-9]|[12][0-9]|3[01])/', $text, $matches);
         if(!empty( $matches )) {
           return $matches[0];
         } else{
-        preg_match('/(\d{1,2}) (\w+) (\d{4})/', $text, $matches);
+          
+          preg_match('/(\d{1,2}) (\w+) (\d{4})/', $text, $matches); // Search for the short date.
           if(!empty( $matches )) {
-            $day = $matches[1] < 10 ? 0 . $matches[1] : $matches[1];
+            $day = $matches[1] < 10 ? 0 . $matches[1] : $matches[1]; // Format the day value
             $year = $matches[3];      
             
-            $month_names = array(
+            $month_names = array( // Array of short names for months.
               "Jan",
               "Feb",
               "Mar",
@@ -112,8 +121,8 @@ class Scrape
               "Dec"
             );     
 
-          $month = array_search($matches[2], $month_names) + 1;
-          $month = strlen($month) < 2 ? '0'.$month : $month; 
+          $month = array_search($matches[2], $month_names) + 1; // Convert the month name to number 
+          $month = strlen($month) < 2 ? '0'.$month : $month;  // Prepend a 0 if month > 10.
           $results = $year . '-' . $month . '-' . $day;        
           return $results;
         }

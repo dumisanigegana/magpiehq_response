@@ -32,7 +32,7 @@ class Scrape
     }
     
     // Converts the $products array to Json using json_encode function, formats the presentation with JSON_PRETTY_PRINT, and unescapes the slashes of the the image URLS.
-    file_put_contents('.\src\output.json', json_encode($this->products, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    file_put_contents('output.json', json_encode($this->products, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
   }
 
    /**

@@ -50,7 +50,7 @@ Please also send us your `output.json`.
 ### Setup
 
 ```
-git clone git@github.com:stickeeuk/magpie-scrape-challenge.git
+git clone https://github.com/dumisanigegana/magpiehq_response.git
 cd magpie-scrape-challenge
 composer install
 ```
